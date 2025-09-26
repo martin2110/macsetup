@@ -1,0 +1,57 @@
+# Bullet Train Configuration
+# https://github.com/caiogondim/bullet-train.zsh/tree/master
+
+# Status
+BULLETTRAIN_STATUS_EXIT_SHOW=true
+
+# Time
+BULLETTRAIN_TIME_BG=021
+BULLETTRAIN_TIME_FG=black
+
+# Kubernetes Context
+BULLETTRAIN_KCTX_BG=026
+BULLETTRAIN_KCTX_FG=black
+
+# Context
+BULLETTRAIN_CONTEXT_DEFAULT_USER={{ ansible_user_id | default('martin.suehowicz') }}
+
+# Go
+BULLETTRAIN_GO_BG=031
+BULLETTRAIN_GO_FG=black
+BULLETTRAIN_GO_PREFIX=""
+
+# Python virtualenv
+BULLETTRAIN_VIRTUALENV_BG=36
+BULLETTRAIN_VIRTUALENV_FG=black
+VIRTUAL_ENV_DISABLE_PROMPT=false
+
+# Git
+BULLETTRAIN_GIT_BG=046
+BULLETTRAIN_GIT_FG=black
+BULLETTRAIN_GIT_COLORIZE_DIRTY=true
+BULLETTRAIN_GIT_COLORIZE_DIRTY_BG_COLOR=61
+BULLETTRAIN_GIT_COLORIZE_DIRTY_FG_COLOR=white
+## Disable git repo from being shown
+## git config oh-my-zsh.hide-status 1
+
+# Directory
+BULLETTRAIN_DIR_EXTENDED=0
+BULLETTRAIN_DIR_BG=226
+BULLETTRAIN_DIR_FG=black
+
+# Status
+BULLETTRAIN_STATUS_FG=black
+BULLETTRAIN_STATUS_ERROR_BG=202
+
+# Plugins order
+BULLETTRAIN_PROMPT_ORDER=(
+  time
+  kctx
+  context
+  go
+  virtualenv
+  git
+  dir
+  cmd_exec_time
+  status
+)

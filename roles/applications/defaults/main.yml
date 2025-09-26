@@ -1,0 +1,6 @@
+---
+# Default variables for applications role
+configure_vscode: true
+configure_iterm2: true
+configure_docker: true
+configure_1password: true

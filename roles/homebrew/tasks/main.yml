@@ -1,0 +1,23 @@
+---
+- name: Update Homebrew
+  homebrew:
+    update_homebrew: true
+  tags: ['homebrew', 'update']
+
+- name: Install essential CLI packages
+  homebrew:
+    name: "{{ essential_packages }}"
+    state: present
+  tags: ['homebrew', 'essential']
+
+- name: Install essential applications
+  homebrew_cask:
+    name: "{{ essential_apps }}"
+    state: present
+  tags: ['homebrew', 'apps']
+
+- name: Install fonts
+  homebrew_cask:
+    name: "{{ fonts }}"
+    state: present
+  tags: ['homebrew', 'fonts']

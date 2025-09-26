@@ -1,0 +1,19 @@
+---
+# Minimal package lists for different categories
+
+# Essential CLI tools that should be installed first
+essential_packages:
+  - git
+  - wget
+  - fzf
+
+# Applications to install via Homebrew Cask
+essential_apps:
+  - iterm2
+  - visual-studio-code
+  - docker
+  - 1password
+
+# Fonts to install
+fonts:
+  - font-hack-nerd-font

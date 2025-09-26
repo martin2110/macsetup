@@ -1,0 +1,155 @@
+---
+- name: Ensure config directories exist
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - ~/.config
+    - ~/.config/git
+    - ~/.local/bin
+  tags: ['dotfiles', 'directories']
+
+- name: Create .zshrc configuration
+  template:
+    src: zshrc.j2
+    dest: ~/.zshrc
+    backup: true
+    mode: '0644'
+  tags: ['dotfiles', 'shell', 'zsh']
+
+- name: Create .zprofile configuration
+  template:
+    src: zprofile.j2
+    dest: ~/.zprofile
+    backup: true
+    mode: '0644'
+  tags: ['dotfiles', 'shell', 'zsh']
+
+- name: Create .gitconfig
+  template:
+    src: gitconfig.j2
+    dest: ~/.gitconfig
+    backup: true
+    mode: '0644'
+  tags: ['dotfiles', 'git']
+
+- name: Create global .gitignore
+  template:
+    src: gitignore_global.j2
+    dest: ~/.gitignore_global
+    backup: true
+    mode: '0644'
+  tags: ['dotfiles', 'git']
+
+- name: Configure Git to use global gitignore
+  shell: git config --global core.excludesfile ~/.gitignore_global
+  tags: ['dotfiles', 'git']
+
+- name: Create .vimrc configuration
+  template:
+    src: vimrc.j2
+    dest: ~/.vimrc
+    backup: true
+    mode: '0644'
+  tags: ['dotfiles', 'vim']
+
+- name: Ensure Neovim config directory exists
+  file:
+    path: ~/.config/nvim
+    state: directory
+    mode: '0755'
+  tags: ['dotfiles', 'neovim']
+
+- name: Create Neovim init.vim
+  template:
+    src: init.vim.j2
+    dest: ~/.config/nvim/init.vim
+    backup: true
+    mode: '0644'
+  tags: ['dotfiles', 'neovim']
+
+- name: Create .tmux.conf
+  template:
+    src: tmux.conf.j2
+    dest: ~/.tmux.conf
+    backup: true
+    mode: '0644'
+  tags: ['dotfiles', 'tmux']
+
+- name: Create bullet-train configuration
+  template:
+    src: bullet-train.zsh.j2
+    dest: ~/.oh-my-zsh/custom/bullet-train.zsh
+    backup: true
+    mode: '0644'
+  tags: ['dotfiles', 'shell', 'bullet-train']
+
+- name: Set Zsh as default shell
+  shell: |
+    if [ "$SHELL" != "/bin/zsh" ]; then
+      chsh -s /bin/zsh
+    fi
+  tags: ['dotfiles', 'shell']
+
+- name: Check if Oh My Zsh is installed
+  stat:
+    path: ~/.oh-my-zsh
+  register: oh_my_zsh_installed
+  tags: ['dotfiles', 'shell', 'oh-my-zsh']
+
+- name: Install Oh My Zsh
+  shell: |
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  when: not oh_my_zsh_installed.stat.exists and install_oh_my_zsh
+  tags: ['dotfiles', 'shell', 'oh-my-zsh']
+
+- name: Check if bullet-train theme is installed
+  stat:
+    path: ~/.oh-my-zsh/custom/themes/bullet-train.zsh-theme
+  register: bullet_train_installed
+  tags: ['dotfiles', 'shell', 'bullet-train']
+
+- name: Install bullet-train theme for Oh My Zsh
+  shell: |
+    git clone https://github.com/caiogondim/bullet-train.zsh.git ~/.oh-my-zsh/custom/themes/bullet-train
+    ln -sf ~/.oh-my-zsh/custom/themes/bullet-train/bullet-train.zsh-theme ~/.oh-my-zsh/custom/themes/bullet-train.zsh-theme
+  when: not bullet_train_installed.stat.exists
+  tags: ['dotfiles', 'shell', 'bullet-train']
+
+- name: Install Python version with pyenv
+  shell: |
+    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"
+    pyenv install {{ python_version }} --skip-existing
+  tags: ['dotfiles', 'python', 'pyenv']
+
+- name: Set global Python version
+  shell: |
+    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"
+    pyenv global {{ python_version }}
+  tags: ['dotfiles', 'python', 'pyenv']
+
+- name: Ensure .venv directory exists
+  file:
+    path: ~/.venv
+    state: directory
+    mode: '0755'
+  tags: ['dotfiles', 'python']
+
+- name: Create default Python virtual environment
+  shell: |
+    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"
+    python -m venv ~/.venv/{{ python_venv_name }}
+  args:
+    creates: ~/.venv/{{ python_venv_name }}
+  tags: ['dotfiles', 'python', 'virtualenv']
+
+- name: Source .zshrc to reload configuration
+  shell: source ~/.zshrc
+  args:
+    executable: /bin/zsh
+  ignore_errors: true
+  tags: ['dotfiles', 'shell']

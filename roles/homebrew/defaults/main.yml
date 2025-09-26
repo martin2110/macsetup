@@ -1,0 +1,5 @@
+---
+# Default variables for homebrew role
+homebrew_update_homebrew: true
+homebrew_upgrade_all: false
+homebrew_clear_cache: false

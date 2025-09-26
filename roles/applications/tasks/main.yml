@@ -1,0 +1,59 @@
+---
+- name: Configure VS Code settings
+  copy:
+    content: |
+      {
+        "editor.fontFamily": "Hack Nerd Font, Monaco, 'Courier New', monospace",
+        "editor.fontSize": 14,
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": true,
+        "editor.renderWhitespace": "boundary",
+        "editor.rulers": [80, 120],
+        "workbench.colorTheme": "Default Dark+",
+        "terminal.integrated.fontFamily": "Hack Nerd Font",
+        "git.enableSmartCommit": true,
+        "git.confirmSync": false,
+        "files.autoSave": "onFocusChange",
+        "editor.formatOnSave": true
+      }
+    dest: "~/Library/Application Support/Code/User/settings.json"
+    mode: '0644'
+    backup: true
+  tags: ['applications', 'vscode']
+
+- name: Set iTerm2 to use Intone Mono Nerd Font
+  osx_defaults:
+    domain: com.googlecode.iterm2
+    key: "New Bookmarks.0.Normal Font"
+    type: string
+    value: "IntoneMono Nerd Font 14"
+  tags: ['applications', 'iterm2']
+
+# Commented out due to osx_defaults module not supporting dict type
+# - name: Configure iTerm2 color scheme
+#   osx_defaults:
+#     domain: com.googlecode.iterm2
+#     key: "New Bookmarks.0.Foreground Color"
+#     type: dict
+#     value:
+#       Red Component: 0.73
+#       Green Component: 0.73
+#       Blue Component: 0.73
+#   tags: ['applications', 'iterm2']
+
+- name: Enable Docker at startup
+  shell: |
+    if [ -d "/Applications/Docker.app" ]; then
+      osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Docker.app", hidden:false}'
+    fi
+  ignore_errors: true
+  tags: ['applications', 'docker']
+
+- name: Configure 1Password to start at login
+  shell: |
+    if [ -d "/Applications/1Password 7 - Password Manager.app" ]; then
+      osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/1Password 7 - Password Manager.app", hidden:false}'
+    fi
+  ignore_errors: true
+  tags: ['applications', '1password']

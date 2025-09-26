@@ -1,0 +1,108 @@
+---
+- name: Configure Dock settings
+  osx_defaults:
+    domain: com.apple.dock
+    key: "{{ item.key }}"
+    type: "{{ item.type }}"
+    value: "{{ item.value }}"
+  loop: "{{ dock_settings }}"
+  notify: restart dock
+  tags: ['macos', 'dock']
+
+- name: Configure Finder settings
+  osx_defaults:
+    domain: com.apple.finder
+    key: "{{ item.key }}"
+    type: "{{ item.type }}"
+    value: "{{ item.value }}"
+  loop: "{{ finder_settings }}"
+  notify: restart finder
+  tags: ['macos', 'finder']
+
+- name: Configure global UI settings
+  osx_defaults:
+    domain: "{{ item.domain }}"
+    key: "{{ item.key }}"
+    type: "{{ item.type }}"
+    value: "{{ item.value }}"
+  loop: "{{ global_ui_settings }}"
+  tags: ['macos', 'ui']
+
+- name: Configure security settings
+  osx_defaults:
+    domain: "{{ item.domain }}"
+    key: "{{ item.key }}"
+    type: "{{ item.type }}"
+    value: "{{ item.value }}"
+  loop: "{{ security_settings }}"
+  tags: ['macos', 'security']
+
+- name: Configure energy settings
+  osx_defaults:
+    domain: "{{ item.domain }}"
+    key: "{{ item.key }}"
+    type: "{{ item.type }}"
+    value: "{{ item.value }}"
+  loop: "{{ energy_settings }}"
+  tags: ['macos', 'energy']
+
+- name: Configure menu bar settings
+  osx_defaults:
+    domain: "{{ item.domain }}"
+    key: "{{ item.key }}"
+    type: "{{ item.type }}"
+    value: "{{ item.value }}"
+  loop: "{{ menu_bar_settings }}"
+  notify: restart system ui server
+  tags: ['macos', 'menubar']
+
+- name: Configure trackpad settings
+  osx_defaults:
+    domain: "{{ item.domain }}"
+    key: "{{ item.key }}"
+    type: "{{ item.type }}"
+    value: "{{ item.value }}"
+  loop: "{{ trackpad_settings }}"
+  tags: ['macos', 'trackpad']
+
+- name: Create Screenshots directory
+  file:
+    path: ~/Desktop/Screenshots
+    state: directory
+    mode: '0755'
+  tags: ['macos', 'screenshots']
+
+- name: Configure screenshot settings
+  osx_defaults:
+    domain: "{{ item.domain }}"
+    key: "{{ item.key }}"
+    type: "{{ item.type }}"
+    value: "{{ item.value }}"
+  loop: "{{ screenshot_settings }}"
+  tags: ['macos', 'screenshots']
+
+- name: Set keyboard repeat rate (requires logout)
+  shell: |
+    defaults write NSGlobalDomain KeyRepeat -int 2
+    defaults write NSGlobalDomain InitialKeyRepeat -int 15
+  tags: ['macos', 'keyboard']
+
+- name: Show hidden files in Finder
+  shell: |
+    defaults write com.apple.finder AppleShowAllFiles -bool true
+    chflags nohidden ~/Library
+  notify: restart finder
+  tags: ['macos', 'finder']
+
+- name: Enable full keyboard access for all controls
+  shell: defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+  tags: ['macos', 'keyboard']
+
+- name: Disable automatic capitalization and spelling corrections
+  shell: |
+    defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+    defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+    defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+    defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+    defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+  tags: ['macos', 'text']

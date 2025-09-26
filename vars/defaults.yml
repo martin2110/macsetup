@@ -1,0 +1,53 @@
+---
+# macOS system preferences and defaults
+
+# Dock settings
+dock_settings:
+  - { key: "tilesize", type: "float", value: 36.0 }
+  - { key: "autohide", type: "bool", value: true }
+  - { key: "orientation", type: "string", value: "bottom" }
+  - { key: "show-recents", type: "bool", value: false }
+  - { key: "minimize-to-application", type: "bool", value: true }
+
+# Finder settings
+finder_settings:
+  - { key: "AppleShowAllFiles", type: "bool", value: true }
+  - { key: "ShowStatusBar", type: "bool", value: true }
+  - { key: "ShowPathbar", type: "bool", value: true }
+  - { key: "FXPreferredViewStyle", type: "string", value: "Nlsv" }
+  - { key: "FXDefaultSearchScope", type: "string", value: "SCcf" }
+
+# Global UI settings
+global_ui_settings:
+  - { domain: "NSGlobalDomain", key: "AppleShowAllExtensions", type: "bool", value: true }
+  - { domain: "NSGlobalDomain", key: "AppleKeyboardUIMode", type: "int", value: 3 }
+  - { domain: "NSGlobalDomain", key: "ApplePressAndHoldEnabled", type: "bool", value: false }
+  - { domain: "NSGlobalDomain", key: "KeyRepeat", type: "int", value: 2 }
+  - { domain: "NSGlobalDomain", key: "InitialKeyRepeat", type: "int", value: 15 }
+  - { domain: "NSGlobalDomain", key: "NSNavPanelExpandedStateForSaveMode", type: "bool", value: true }
+  - { domain: "NSGlobalDomain", key: "NSNavPanelExpandedStateForSaveMode2", type: "bool", value: true }
+
+# Security settings
+security_settings:
+  - { domain: "com.apple.screensaver", key: "askForPassword", type: "int", value: 1 }
+  - { domain: "com.apple.screensaver", key: "askForPasswordDelay", type: "int", value: 0 }
+
+# Energy settings
+energy_settings:
+  - { domain: "com.apple.screensaver", key: "idleTime", type: "int", value: 600 }
+
+# Menu bar settings
+menu_bar_settings:
+  - { domain: "com.apple.menuextra.clock", key: "DateFormat", type: "string", value: "EEE MMM d  h:mm:ss a" }
+  - { domain: "NSGlobalDomain", key: "AppleShowMenuBarClock", type: "bool", value: true }
+
+# Trackpad settings
+trackpad_settings:
+  - { domain: "com.apple.driver.AppleBluetoothMultitouch.trackpad", key: "Clicking", type: "int", value: 1 }
+  - { domain: "NSGlobalDomain", key: "com.apple.mouse.tapBehavior", type: "int", value: 1 }
+
+# Screenshot settings
+screenshot_settings:
+  - { domain: "com.apple.screencapture", key: "location", type: "string", value: "~/Desktop/Screenshots" }
+  - { domain: "com.apple.screencapture", key: "type", type: "string", value: "png" }
+  - { domain: "com.apple.screencapture", key: "disable-shadow", type: "bool", value: true }
