@@ -3,7 +3,7 @@
 
 # Dock settings
 dock_settings:
-  - { key: "tilesize", type: "float", value: 36.0 }
+  - { key: "tilesize", type: "float", value: 50.0 }
   - { key: "autohide", type: "bool", value: true }
   - { key: "orientation", type: "string", value: "bottom" }
   - { key: "show-recents", type: "bool", value: false }

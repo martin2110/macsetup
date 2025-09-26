@@ -27,7 +27,55 @@
     domain: com.googlecode.iterm2
     key: "New Bookmarks.0.Normal Font"
     type: string
-    value: "IntoneMono Nerd Font 14"
+    value: "IntoneMono Nerd Font 18"
+  tags: ['applications', 'iterm2']
+
+- name: Create iTerm2 color schemes directory
+  file:
+    path: ~/Downloads/iTerm2-ColorSchemes
+    state: directory
+    mode: '0755'
+  tags: ['applications', 'iterm2']
+
+- name: Download 0x96f iTerm2 color scheme for manual import
+  get_url:
+    url: https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/0x96f.itermcolors
+    dest: ~/Downloads/iTerm2-ColorSchemes/0x96f.itermcolors
+    mode: '0644'
+  tags: ['applications', 'iterm2']
+
+- name: Remove incorrect color scheme file from DynamicProfiles
+  file:
+    path: ~/Library/Application Support/iTerm2/DynamicProfiles/0x96f.itermcolors
+    state: absent
+  tags: ['applications', 'iterm2']
+
+- name: Set 0x96f iTerm2 color scheme via shell
+  shell: |
+    # Set background color (dark gray)
+    defaults write com.googlecode.iterm2 "New Bookmarks.0.Background Color" -dict \
+      "Red Component" 0.0588235 \
+      "Green Component" 0.0588235 \
+      "Blue Component" 0.0588235
+
+    # Set foreground color (light gray)
+    defaults write com.googlecode.iterm2 "New Bookmarks.0.Foreground Color" -dict \
+      "Red Component" 0.6 \
+      "Green Component" 0.6 \
+      "Blue Component" 0.6
+
+    # Set cursor color
+    defaults write com.googlecode.iterm2 "New Bookmarks.0.Cursor Color" -dict \
+      "Red Component" 0.94902 \
+      "Green Component" 0.375977 \
+      "Blue Component" 0.063919
+
+    # Set bold color
+    defaults write com.googlecode.iterm2 "New Bookmarks.0.Bold Color" -dict \
+      "Red Component" 0.8 \
+      "Green Component" 0.8 \
+      "Blue Component" 0.8
+  ignore_errors: true
   tags: ['applications', 'iterm2']
 
 # Commented out due to osx_defaults module not supporting dict type
