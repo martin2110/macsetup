@@ -8,6 +8,8 @@ dock_settings:
   - { key: "orientation", type: "string", value: "bottom" }
   - { key: "show-recents", type: "bool", value: false }
   - { key: "minimize-to-application", type: "bool", value: true }
+  - { key: "magnification", type: "bool", value: true }
+  - { key: "largesize", type: "float", value: 60 }
 
 # Finder settings
 finder_settings:
@@ -30,7 +32,7 @@ global_ui_settings:
 # Security settings
 security_settings:
   - { domain: "com.apple.screensaver", key: "askForPassword", type: "int", value: 1 }
-  - { domain: "com.apple.screensaver", key: "askForPasswordDelay", type: "int", value: 0 }
+  - { domain: "com.apple.screensaver", key: "askForPasswordDelay", type: "int", value: 30 }
 
 # Energy settings
 energy_settings:

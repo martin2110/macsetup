@@ -21,6 +21,7 @@ brew "pyenv"
 brew "tmux"
 brew "helm"
 brew "gh"
+brew "diff-so-fancy"
 
 # Applications
 cask "google-chrome"
@@ -32,6 +33,7 @@ cask "obsidian"
 cask "slack"
 cask "gitkraken-cli"
 cask "ollama-app"
+cask "proxyman"
 
 # Fonts
 cask "font-hack-nerd-font"
