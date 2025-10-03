@@ -88,6 +88,11 @@ ansible-playbook playbook.yml -i inventory.yml --list-tags
    brew "new-cli-tool"
    cask "new-application"
    ```
+2. Add custom taps if needed:
+   ```ruby
+   tap "custom/tap"
+   brew "custom/tap/package"
+   ```
 
 ### Modifying System Preferences
 1. Add entries to appropriate section in `vars/defaults.yml`:
@@ -106,6 +111,26 @@ Update `roles/dotfiles/defaults/main.yml` with your information:
 git_user_name: "Your Name"
 git_user_email: "your.email@example.com"
 ```
+
+## Automated Package Management Workflow
+
+This project includes a Claude Code hook (`.claude.json`) that automatically enforces the following workflow when adding packages:
+
+### Standard Package Addition Process
+When you ask Claude to add packages, it will automatically:
+1. **Add packages to Brewfile** - Update the Brewfile with new packages and required taps
+2. **Run ./install** - Execute the full installation script to install packages and apply configurations
+3. **Update documentation** - Modify both README.md and CLAUDE.md to reflect the new packages
+4. **Commit changes** - Create a git commit if explicitly requested
+
+### Hook Configuration
+The `.claude.json` file contains a `UserPromptSubmit` hook that detects package-related requests and automatically reminds Claude to follow the complete workflow. This ensures consistency and prevents missed steps.
+
+### Manual Override
+If you need to bypass the automated workflow:
+- Edit the Brewfile directly and run specific commands manually
+- Use `brew bundle --file=Brewfile` to install only packages without full system configuration
+- Disable the hook temporarily by renaming `.claude.json`
 
 ## Important Implementation Details
 

@@ -40,6 +40,8 @@ That's it! The script will:
 - **htop** - Interactive process viewer
 - **bat** - Cat with syntax highlighting
 - **go** - Go programming language
+- **node** - Node.js JavaScript runtime
+- **python@3.12** - Python programming language
 - **gawk** - GNU AWK text processing
 - **mtr** - Network diagnostic tool (traceroute + ping)
 - **pyenv** - Python version management
@@ -47,6 +49,12 @@ That's it! The script will:
 - **gitkraken-cli** - GitKraken command line interface
 - **helm** - Kubernetes package manager
 - **gh** - GitHub CLI for repository management
+- **act** - Run GitHub Actions locally
+- **go-task** - Task runner / build tool
+- **civo** - Civo Cloud CLI
+- **yq** - YAML processor and query tool
+- **kubectl** - Kubernetes command-line tool
+- **kluctl** - GitOps deployment tool
 
 ### Fonts
 - **Hack Nerd Font** - Programming font with icons
@@ -54,27 +62,116 @@ That's it! The script will:
 
 ## What Gets Configured
 
-### System Preferences
-- Dock settings (auto-hide, size, position)
-- Finder settings (show hidden files, path bar)
-- Screenshot settings (PNG format, custom location)
-- Keyboard settings (fast repeat rate)
-- Trackpad settings (tap to click)
-- Security settings (require password immediately)
+### Complete macOS Configuration Changes
 
-### Shell Configuration
-- Zsh with Oh My Zsh
-- Useful aliases and functions
-- Enhanced history settings
-- Integration with fzf for fuzzy searching
-- Custom prompt with git integration
+#### 🎛️ Dock Settings (`com.apple.dock`)
+- **Tile Size**: 50px (medium size icons)
+- **Auto-hide**: Enabled (dock hides when not in use)
+- **Position**: Bottom of screen
+- **Recent Apps**: Disabled (no recent applications shown)
+- **Minimize to Application**: Enabled (windows minimize into app icon)
+- **Magnification**: Enabled with 60px large size
 
-### Application Configuration
-- VS Code settings with Hack Nerd Font
-- iTerm2 color scheme and font configuration
-- Git global configuration with sensible defaults
-- Vim/Neovim configuration
-- Tmux configuration with sensible defaults
+#### 📁 Finder Settings (`com.apple.finder`)
+- **Show Hidden Files**: Enabled (`.files` and system files visible)
+- **Status Bar**: Shown at bottom of Finder windows
+- **Path Bar**: Shown at bottom of Finder windows
+- **Default View**: List view (`Nlsv`)
+- **Search Scope**: Current folder (`SCcf`)
+- **Library Folder**: Unhidden (`chflags nohidden ~/Library`) - **Requires Password**
+
+#### ⌨️ Keyboard & Input Settings (`NSGlobalDomain`)
+- **Key Repeat Rate**: 2ms (very fast)
+- **Initial Key Repeat**: 15ms (short delay before repeat starts)
+- **Full Keyboard Access**: Enabled (tab through all controls)
+- **Press and Hold**: Disabled (allows key repeat instead of accent menu)
+- **Auto-corrections**: All disabled
+  - Automatic capitalization: Off
+  - Smart dashes: Off
+  - Smart periods: Off
+  - Smart quotes: Off
+  - Spell check: Off
+
+#### 🖱️ Trackpad Settings
+- **Tap to Click**: Enabled for trackpad (`com.apple.driver.AppleBluetoothMultitouch.trackpad`)
+- **Tap to Click**: Enabled for mouse/trackpad globally (`NSGlobalDomain`)
+
+#### 🔒 Security & Privacy Settings
+- **Screen Lock**: Require password immediately after screensaver (`com.apple.screensaver`)
+- **Password Delay**: 30 seconds
+- **Screen Idle Time**: 10 minutes (600 seconds)
+
+#### 📸 Screenshot Configuration (`com.apple.screencapture`)
+- **Format**: PNG (high quality)
+- **Location**: `~/Desktop/Screenshots` (organized storage)
+- **Shadows**: Disabled (clean screenshots)
+
+#### 🕐 Menu Bar Settings
+- **Clock Format**: Full date and time (`EEE MMM d  h:mm:ss a`)
+  - Shows: "Mon Oct 3  2:30:45 PM"
+- **Menu Bar Clock**: Always visible
+
+#### 📄 File & Save Dialog Settings (`NSGlobalDomain`)
+- **File Extensions**: Always show all file extensions
+- **Save Dialogs**: Always expanded by default
+- **Save Mode**: Expanded state remembered
+
+#### 🐚 Shell & Terminal Configuration
+- **Default Shell**: Changed to Zsh (`/bin/zsh`) - **Requires Password**
+- **Oh My Zsh**: Installed with bullet-train theme
+- **Shell Aliases**: Enhanced commands (ls, grep, etc.)
+- **History**: Improved settings with search and deduplication
+
+#### 💻 Application-Specific Configurations
+
+##### Visual Studio Code (`~/Library/Application Support/Code/User/settings.json`)
+- **Font**: Hack Nerd Font, 14px
+- **Tab Size**: 2 spaces
+- **Editor**: Auto-save on focus change, format on save
+- **Rulers**: 80 and 120 character guides
+- **Theme**: Default Dark+
+- **Terminal Font**: Hack Nerd Font
+- **Git**: Smart commit enabled, sync confirmation disabled
+- **Whitespace**: Boundary rendering enabled
+
+##### iTerm2 (`com.googlecode.iterm2`)
+- **Font**: IntoneMono Nerd Font, 18pt
+- **Color Scheme**: 0x96f (dark theme)
+  - Background: Dark gray (#0F0F0F)
+  - Foreground: Light gray (#999999)
+  - Cursor: Orange accent (#F26010)
+  - Bold text: Bright gray (#CCCCCC)
+
+##### Startup Applications (Login Items)
+- **Docker Desktop**: Auto-start on login
+- **1Password**: Auto-start on login (if installed)
+
+##### Git Configuration (`~/.gitconfig`)
+- Global user name and email (from variables)
+- Global gitignore file (`~/.gitignore_global`)
+- Sensible defaults for push, pull, and merge behavior
+
+##### Vim/Neovim Configuration
+- Basic configuration with useful settings
+- Syntax highlighting and line numbers
+- Modern defaults for editing
+
+##### Tmux Configuration (`~/.tmux.conf`)
+- Sensible defaults for terminal multiplexing
+- Enhanced key bindings
+- Status bar configuration
+
+##### Python Development Environment
+- **pyenv**: Python version management
+- **Default Python**: Latest stable version installed
+- **Virtual Environment**: Default venv created in `~/.venv/`
+
+### Password Requirements Summary
+The following operations require your macOS password:
+1. **Shell Change** (`chsh -s /bin/zsh`) - Changes default shell to Zsh
+2. **Library Folder** (`chflags nohidden ~/Library`) - Unhides the Library folder
+
+All other configurations use the `defaults write` command which modifies user preferences without requiring admin privileges.
 
 ## Customization
 
@@ -197,7 +294,7 @@ When you run `./install`, this automation will:
 
 ### Phase 2: Package Installation
 - **Applications**: Google Chrome, iTerm2, Visual Studio Code, Docker Desktop, 1Password, Obsidian, Slack
-- **CLI Tools**: git, wget, fzf (fuzzy finder), neovim (modern vim), ollama (local LLMs), jq (JSON processor), tree (directory visualization), htop (process viewer), bat (enhanced cat), go (programming language), gawk (text processing), mtr (network diagnostics), pyenv (Python versions), tmux (terminal multiplexer), gitkraken-cli (git interface), helm (Kubernetes package manager), gh (GitHub CLI)
+- **CLI Tools**: git, wget, fzf (fuzzy finder), neovim (modern vim), ollama (local LLMs), jq (JSON processor), tree (directory visualization), htop (process viewer), bat (enhanced cat), go (programming language), node (JavaScript runtime), python@3.12 (Python), gawk (text processing), mtr (network diagnostics), pyenv (Python versions), tmux (terminal multiplexer), gitkraken-cli (git interface), helm (Kubernetes package manager), gh (GitHub CLI), act (GitHub Actions locally), go-task (task runner), civo (Civo Cloud CLI), yq (YAML processor), kubectl (Kubernetes CLI), kluctl (GitOps deployment)
 - **Fonts**: Hack Nerd Font with programming icons
 
 ### Phase 3: System Configuration
