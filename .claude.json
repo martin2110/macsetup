@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash -c 'if echo \"$CLAUDE_USER_PROMPT\" | grep -iE \"(add|install).*(package|brew|homebrew)\" > /dev/null; then echo \"{\\\"decision\\\": \\\"allow\\\", \\\"contextModifications\\\": [{\\\"type\\\": \\\"append\\\", \\\"content\\\": \\\"\\n\\nIMPORTANT: After adding packages to the Brewfile, always:\\n1. Run ./install to install the packages\\n2. Update both README.md and CLAUDE.md documentation to reflect the new packages\\n3. Commit the changes if requested by the user\\\"}]}\"; fi'"
+            "command": "bash -c 'if echo \"$CLAUDE_USER_PROMPT\" | grep -iE \"(add|install).*(package|brew|homebrew)\" > /dev/null; then echo \"{\\\"decision\\\": \\\"allow\\\", \\\"contextModifications\\\": [{\\\"type\\\": \\\"append\\\", \\\"content\\\": \\\"\\n\\nIMPORTANT: After adding packages to the Brewfile, always:\\n1. Run ./install to install the packages\\n2. Update both README.md and CLAUDE.md documentation to reflect the new packages\\n3. Commit and push all changes to the remote repository\\\"}]}\"; fi'"
           }
         ]
       }

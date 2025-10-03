@@ -97,8 +97,8 @@ That's it! The script will:
 - **Tap to Click**: Enabled for mouse/trackpad globally (`NSGlobalDomain`)
 
 #### 🔒 Security & Privacy Settings
-- **Screen Lock**: Require password immediately after screensaver (`com.apple.screensaver`)
-- **Password Delay**: 30 seconds
+- **Screen Lock**: Disabled (no password required after screensaver) (`com.apple.screensaver`)
+- **Password Delay**: Disabled (0 seconds)
 - **Screen Idle Time**: 10 minutes (600 seconds)
 
 #### 📸 Screenshot Configuration (`com.apple.screencapture`)

@@ -31,8 +31,8 @@ global_ui_settings:
 
 # Security settings
 security_settings:
-  - { domain: "com.apple.screensaver", key: "askForPassword", type: "int", value: 1 }
-  - { domain: "com.apple.screensaver", key: "askForPasswordDelay", type: "int", value: 30 }
+  - { domain: "com.apple.screensaver", key: "askForPassword", type: "int", value: 0 }
+  - { domain: "com.apple.screensaver", key: "askForPasswordDelay", type: "int", value: 0 }
 
 # Energy settings
 energy_settings:

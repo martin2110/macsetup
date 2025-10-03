@@ -121,7 +121,7 @@ When you ask Claude to add packages, it will automatically:
 1. **Add packages to Brewfile** - Update the Brewfile with new packages and required taps
 2. **Run ./install** - Execute the full installation script to install packages and apply configurations
 3. **Update documentation** - Modify both README.md and CLAUDE.md to reflect the new packages
-4. **Commit changes** - Create a git commit if explicitly requested
+4. **Commit and push changes** - Always create a git commit and push to remote after making changes
 
 ### Hook Configuration
 The `.claude.json` file contains a `UserPromptSubmit` hook that detects package-related requests and automatically reminds Claude to follow the complete workflow. This ensures consistency and prevents missed steps.
@@ -131,6 +131,27 @@ If you need to bypass the automated workflow:
 - Edit the Brewfile directly and run specific commands manually
 - Use `brew bundle --file=Brewfile` to install only packages without full system configuration
 - Disable the hook temporarily by renaming `.claude.json`
+
+## Git Workflow Requirements
+
+**IMPORTANT**: After making ANY changes to this repository, always:
+1. **Commit changes** with a descriptive message
+2. **Push to remote** to keep the repository up-to-date
+
+This applies to:
+- Package additions or removals
+- Configuration changes (macOS defaults, dotfiles, etc.)
+- Documentation updates
+- Any file modifications
+
+### Standard Commit Process
+```bash
+git add .
+git commit -m "Descriptive commit message"
+git push origin main
+```
+
+The automated workflow will handle this for package-related changes, but for all other modifications, explicitly commit and push the changes immediately after making them.
 
 ## Important Implementation Details
 
