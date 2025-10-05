@@ -32,8 +32,10 @@ brew "civo/tools/civo"
 brew "yq"
 brew "kubectl"
 brew "kluctl/tap/kluctl"
+brew "nmap"
 
 # Applications
+cask "wireshark"
 cask "google-chrome"
 cask "iterm2"
 cask "visual-studio-code"

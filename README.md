@@ -28,6 +28,7 @@ That's it! The script will:
 - **1Password** - Password manager
 - **Obsidian** - Knowledge management and note-taking
 - **Slack** - Team communication and collaboration
+- **Wireshark** - Network protocol analyzer
 
 ### CLI Tools
 - **git** - Version control
@@ -55,6 +56,7 @@ That's it! The script will:
 - **yq** - YAML processor and query tool
 - **kubectl** - Kubernetes command-line tool
 - **kluctl** - GitOps deployment tool
+- **nmap** - Network exploration and security auditing tool
 
 ### Fonts
 - **Hack Nerd Font** - Programming font with icons
@@ -293,8 +295,8 @@ When you run `./install`, this automation will:
 - Install Ansible automation tool (if not present)
 
 ### Phase 2: Package Installation
-- **Applications**: Google Chrome, iTerm2, Visual Studio Code, Docker Desktop, 1Password, Obsidian, Slack
-- **CLI Tools**: git, wget, fzf (fuzzy finder), neovim (modern vim), ollama (local LLMs), jq (JSON processor), tree (directory visualization), htop (process viewer), bat (enhanced cat), go (programming language), node (JavaScript runtime), python@3.12 (Python), gawk (text processing), mtr (network diagnostics), pyenv (Python versions), tmux (terminal multiplexer), gitkraken-cli (git interface), helm (Kubernetes package manager), gh (GitHub CLI), act (GitHub Actions locally), go-task (task runner), civo (Civo Cloud CLI), yq (YAML processor), kubectl (Kubernetes CLI), kluctl (GitOps deployment)
+- **Applications**: Google Chrome, iTerm2, Visual Studio Code, Docker Desktop, 1Password, Obsidian, Slack, Wireshark (network protocol analyzer)
+- **CLI Tools**: git, wget, fzf (fuzzy finder), neovim (modern vim), ollama (local LLMs), jq (JSON processor), tree (directory visualization), htop (process viewer), bat (enhanced cat), go (programming language), node (JavaScript runtime), python@3.12 (Python), gawk (text processing), mtr (network diagnostics), pyenv (Python versions), tmux (terminal multiplexer), gitkraken-cli (git interface), helm (Kubernetes package manager), gh (GitHub CLI), act (GitHub Actions locally), go-task (task runner), civo (Civo Cloud CLI), yq (YAML processor), kubectl (Kubernetes CLI), kluctl (GitOps deployment), nmap (network security auditing)
 - **Fonts**: Hack Nerd Font with programming icons
 
 ### Phase 3: System Configuration
